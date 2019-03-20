@@ -14,11 +14,13 @@ import java.util.List;
 import java.util.UUID;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -80,4 +82,23 @@ public class MarcaRest {
             return Response.status(Response.Status.BAD_REQUEST).entity(mapa).build();
         }
     }
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMarcasTest(@HeaderParam(HttpHeaders.AUTHORIZATION) String token) {
+        System.out.println("Aqui esta el token " + token);
+        if (token != null) {
+            List<MarcaModel> lista = new ArrayList<>();
+            for (Marca m : obj.listar()) {
+                lista.add(new MarcaModel(m));
+            }
+            return Response.status(Response.Status.OK).entity(lista).build();
+        } else {
+            HashMap mapa = new HashMap();
+                mapa.put("msg", "No esta autorizado");
+                return Response.status(Response.Status.FORBIDDEN).entity(mapa).build();
+        }
+    }
+
 }
