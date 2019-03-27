@@ -51,9 +51,9 @@ public class MarcaRest {
                 return Response.status(Response.Status.OK).entity(lista).build();
             } else {
                 return Response.status(
-                    Response.Status.FORBIDDEN)
-                    .entity(Utilidades.mensajesError(Utilidades.ERROR_NOT_AUTHENTICATE))
-                    .build();
+                        Response.Status.FORBIDDEN)
+                        .entity(Utilidades.mensajesError(Utilidades.ERROR_NOT_AUTHENTICATE))
+                        .build();
             }
 
         } else {
@@ -68,59 +68,71 @@ public class MarcaRest {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response guardarMarca(Marca marca) {
-        obj.setMarca(null);
-        marca.setExternal_id(UUID.randomUUID().toString());
-        obj.setMarca(marca);
-        if (obj.guardar()) {
-            return Response.status(Response.Status.OK).entity(new MarcaModel(obj.getMarca())).build();
+    public Response guardarMarca(@HeaderParam(HttpHeaders.AUTHORIZATION) String token, @HeaderParam("permiso") String permiso, Marca marca) {
+        if (Utilidades.permisoAdmin(token, permiso)) {
+            if (Utilidades.permisoAdmin(token, permiso)) {
+                obj.setMarca(null);
+                marca.setExternal_id(UUID.randomUUID().toString());
+                obj.setMarca(marca);
+                if (obj.guardar()) {
+                    return Response.status(Response.Status.OK).entity(new MarcaModel(obj.getMarca())).build();
+                } else {
+                    HashMap mapa = new HashMap();
+                    mapa.put("msg", "No se pudo guardar");
+                    return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(mapa).build();
+                }
+            } else {
+                return Response.status(
+                        Response.Status.FORBIDDEN)
+                        .entity(Utilidades.mensajesError(Utilidades.ERROR_NOT_AUTHENTICATE))
+                        .build();
+            }
         } else {
-            HashMap mapa = new HashMap();
-            mapa.put("msg", "No se pudo guardar");
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(mapa).build();
+            return Response.status(
+                    Response.Status.FORBIDDEN)
+                    .entity(Utilidades.mensajesError(Utilidades.ERROR_NOT_EXITS_TOKEN))
+                    .build();
         }
+
     }
 
     @PUT
     @Path("/{external_id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response modificarMarca(@PathParam("external_id") String external_id, Marca marca) {
-        obj.setMarca(null);
-        Marca marc = obj.obtenerMarcaExternal(external_id);
-        if (marc != null) {
-            obj.setMarca(marc);
-            obj.getMarca().setNombre(marca.getNombre());
-            if (obj.guardar()) {
-                return Response.status(Response.Status.OK).entity(new MarcaModel(obj.getMarca())).build();
+    public Response modificarMarca(@HeaderParam(HttpHeaders.AUTHORIZATION) String token, @HeaderParam("permiso") String permiso, @PathParam("external_id") String external_id, Marca marca) {
+        if (Utilidades.permisoAdmin(token, permiso)) {
+            if (Utilidades.permisoAdmin(token, permiso)) {
+                obj.setMarca(null);
+                Marca marc = obj.obtenerMarcaExternal(external_id);
+                if (marc != null) {
+                    obj.setMarca(marc);
+                    obj.getMarca().setNombre(marca.getNombre());
+                    if (obj.guardar()) {
+                        return Response.status(Response.Status.OK).entity(new MarcaModel(obj.getMarca())).build();
+                    } else {
+                        HashMap mapa = new HashMap();
+                        mapa.put("msg", "No se pudo guardar");
+                        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(mapa).build();
+                    }
+                } else {
+                    HashMap mapa = new HashMap();
+                    mapa.put("msg", "No se pudo encontrar");
+                    return Response.status(Response.Status.BAD_REQUEST).entity(mapa).build();
+                }
             } else {
-                HashMap mapa = new HashMap();
-                mapa.put("msg", "No se pudo guardar");
-                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(mapa).build();
+                return Response.status(
+                        Response.Status.FORBIDDEN)
+                        .entity(Utilidades.mensajesError(Utilidades.ERROR_NOT_AUTHENTICATE))
+                        .build();
             }
         } else {
-            HashMap mapa = new HashMap();
-            mapa.put("msg", "No se pudo encontrar");
-            return Response.status(Response.Status.BAD_REQUEST).entity(mapa).build();
+            return Response.status(
+                    Response.Status.FORBIDDEN)
+                    .entity(Utilidades.mensajesError(Utilidades.ERROR_NOT_EXITS_TOKEN))
+                    .build();
         }
-    }
 
-    @GET
-    @Path("/test")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getMarcasTest(@HeaderParam(HttpHeaders.AUTHORIZATION) String token) {
-        System.out.println("Aqui esta el token " + token);
-        if (token != null) {
-            List<MarcaModel> lista = new ArrayList<>();
-            for (Marca m : obj.listar()) {
-                lista.add(new MarcaModel(m));
-            }
-            return Response.status(Response.Status.OK).entity(lista).build();
-        } else {
-            HashMap mapa = new HashMap();
-            mapa.put("msg", "No esta autorizado");
-            return Response.status(Response.Status.FORBIDDEN).entity(mapa).build();
-        }
     }
 
 }
