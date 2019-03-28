@@ -10,5 +10,11 @@ package com.vinos.modelo.enums;
  * @author sissy
  */
 public enum TipoVino {
-    ESPUMOSO, TINTO, BLANCO
+    ESPUMOSO("Espumoso"), TINTO("Tinto"), BLANCO("Blanco");
+    private String tipo;
+
+    private TipoVino(String tipo) {
+        this.tipo = tipo;
+    }
+    
 }
