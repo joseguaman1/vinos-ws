@@ -17,7 +17,7 @@ import javax.persistence.EntityManager;
  */
 public class AdaptadorDao <T> implements InterfazDao<T> {
     private Class clzz;
-
+ 
     public AdaptadorDao(Class clzz) {
         this.clzz = clzz;
     }

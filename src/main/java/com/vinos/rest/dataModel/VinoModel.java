@@ -17,7 +17,8 @@ public class VinoModel {
     public String marca;
     public String tipo;
     public String precio;
-    public String pais;    
+    public String pais;  
+    public String foto;  
 
     public VinoModel(Vino vino) {
         nombre = vino.getNombre();
@@ -26,6 +27,7 @@ public class VinoModel {
         tipo = String.valueOf(vino.getTipo());
         precio = String.valueOf(vino.getPrecio());
         pais = vino.getPais();
+        foto = vino.getFoto();
     }
     
 }

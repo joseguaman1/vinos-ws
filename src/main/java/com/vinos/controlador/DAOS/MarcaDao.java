@@ -6,6 +6,8 @@
 package com.vinos.controlador.DAOS;
 
 import com.vinos.modelo.Marca;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
 
 /**
@@ -59,6 +61,19 @@ public class MarcaDao extends AdaptadorDao<Marca> {
             System.out.println("No se pudo encotrar la marca " + e);
         }
         return m;
+    }
+    
+    public List<Marca> listadoMarcaEstado(Boolean estado) {
+        List<Marca> lista = new ArrayList();
+        try {
+            String query = "Select p from Marca p where p.estado = :estado";
+            Query consulta = getManager().createQuery(query);
+            consulta.setParameter("estado", estado);
+            lista = consulta.getResultList();
+        } catch (Exception e) {
+            System.out.println("No se pudo encotrar la marca " + e);
+        }
+        return lista;
     }
 
 }

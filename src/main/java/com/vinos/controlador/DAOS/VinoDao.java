@@ -13,7 +13,7 @@ import com.vinos.modelo.Vino;
  */
 public class VinoDao extends AdaptadorDao<Vino> {
 
-    private Vino vino;
+    private Vino vino; 
 
     public VinoDao() {
         super(Vino.class);

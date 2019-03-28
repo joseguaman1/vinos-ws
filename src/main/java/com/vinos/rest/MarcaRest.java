@@ -134,5 +134,33 @@ public class MarcaRest {
         }
 
     }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/activos")
+    public Response getMarcasActivas(@HeaderParam(HttpHeaders.AUTHORIZATION) String token, @HeaderParam("permiso") String permiso) {
+        if (token != null && !StringUtils.isAllEmpty(token) && permiso != null && !StringUtils.isAllEmpty(permiso)) {
+            if (Utilidades.permisoAdmin(token, permiso)) {
+                List<MarcaModel> lista = new ArrayList<>();
+                for (Marca m : obj.listadoMarcaEstado(Boolean.TRUE)) {
+                    lista.add(new MarcaModel(m));
+                }
+                return Response.status(Response.Status.OK).entity(lista).build();
+            } else {
+                return Response.status(
+                        Response.Status.FORBIDDEN)
+                        .entity(Utilidades.mensajesError(Utilidades.ERROR_NOT_AUTHENTICATE))
+                        .build();
+            }
+
+        } else {
+            return Response.status(
+                    Response.Status.FORBIDDEN)
+                    .entity(Utilidades.mensajesError(Utilidades.ERROR_NOT_EXITS_TOKEN))
+                    .build();
+        }
+
+    }
+    
 
 }

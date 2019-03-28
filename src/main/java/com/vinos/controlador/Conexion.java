@@ -15,7 +15,7 @@ import javax.persistence.Persistence;
  */
 public class Conexion {
     private static String NAME_PERSISTENCE = "vinosPU";
-    private static EntityManager em;
+    private static EntityManager em; 
     private static EntityManagerFactory sesion() {
         return Persistence.createEntityManagerFactory(NAME_PERSISTENCE);
     }

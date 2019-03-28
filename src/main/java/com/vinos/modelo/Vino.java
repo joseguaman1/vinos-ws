@@ -47,6 +47,8 @@ public class Vino implements Serializable {
     private String pais;
     @Column(length = 90)
     private String external_id;
+    @Column(length = 200)
+    private String foto;
     @Override
     public String toString() {
         return "com.vinos.modelo.Vino[ id=" + id + " ]";

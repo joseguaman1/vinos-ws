@@ -14,7 +14,7 @@ import javax.persistence.Query;
  */
 public class CuentaDao extends AdaptadorDao<Cuenta> {
 
-    private Cuenta cuenta;
+    private Cuenta cuenta; 
 
     public CuentaDao() {
         super(Cuenta.class);

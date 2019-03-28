@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.vinos.MyResourceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.121 sec <<< FAILURE!
-testGetIt(com.vinos.MyResourceTest)  Time elapsed: 2.047 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.464 sec <<< FAILURE!
+testGetIt(com.vinos.MyResourceTest)  Time elapsed: 3.36 sec  <<< ERROR!
 javax.ws.rs.NotFoundException: HTTP 404 Not Found
 	at org.glassfish.jersey.client.JerseyInvocation.convertToException(JerseyInvocation.java:1008)
 	at org.glassfish.jersey.client.JerseyInvocation.translate(JerseyInvocation.java:816)

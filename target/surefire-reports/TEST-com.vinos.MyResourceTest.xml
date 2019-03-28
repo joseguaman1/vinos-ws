@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.vinos.MyResourceTest" time="2.12" errors="1" skipped="0">
+<testsuite tests="1" failures="0" name="com.vinos.MyResourceTest" time="3.464" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
@@ -60,7 +60,7 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.vinos.MyResourceTest" name="testGetIt" time="2.047">
+  <testcase classname="com.vinos.MyResourceTest" name="testGetIt" time="3.36">
     <error message="HTTP 404 Not Found" type="javax.ws.rs.NotFoundException">javax.ws.rs.NotFoundException: HTTP 404 Not Found
 	at org.glassfish.jersey.client.JerseyInvocation.convertToException(JerseyInvocation.java:1008)
 	at org.glassfish.jersey.client.JerseyInvocation.translate(JerseyInvocation.java:816)
@@ -106,12 +106,12 @@
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
-    <system-err>mar 26, 2019 11:09:56 AM org.glassfish.grizzly.http.server.NetworkListener start
-INFORMACIÓN: Started listener bound to [localhost:8090]
-mar 26, 2019 11:09:56 AM org.glassfish.grizzly.http.server.HttpServer start
+    <system-err>mar 28, 2019 8:52:49 AM org.glassfish.grizzly.http.server.NetworkListener start
+INFORMACIÓN: Started listener bound to [0.0.0.0:8090]
+mar 28, 2019 8:52:49 AM org.glassfish.grizzly.http.server.HttpServer start
 INFORMACIÓN: [HttpServer] Started.
-mar 26, 2019 11:09:57 AM org.glassfish.grizzly.http.server.NetworkListener shutdownNow
-INFORMACIÓN: Stopped listener bound to [localhost:8090]
+mar 28, 2019 8:52:50 AM org.glassfish.grizzly.http.server.NetworkListener shutdownNow
+INFORMACIÓN: Stopped listener bound to [0.0.0.0:8090]
 </system-err>
   </testcase>
 </testsuite>

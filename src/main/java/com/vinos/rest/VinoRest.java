@@ -9,6 +9,7 @@ import com.vinos.controlador.DAOS.VinoDao;
 import com.vinos.controlador.Utilidades;
 import com.vinos.modelo.Marca;
 import com.vinos.modelo.Vino;
+import com.vinos.modelo.enums.TipoVino;
 import com.vinos.rest.dataModel.MarcaModel;
 import com.vinos.rest.dataModel.VinoModel;
 import java.util.ArrayList;
@@ -54,6 +55,12 @@ public class VinoRest {
                     .build();
         }
 
-    }
+    } 
     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/tipos")
+    public Response listaTipos() {
+        return Response.status(Response.Status.OK).entity(TipoVino.values()).build();
+    }
 }
